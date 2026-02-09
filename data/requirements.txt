@@ -1,0 +1,13 @@
+numpy
+pandas
+scikit-learn
+torch
+transformers
+datasets
+sentence-transformers
+scipy
+matplotlib
+seaborn
+tqdm
+pyyaml
+sqlite-utils

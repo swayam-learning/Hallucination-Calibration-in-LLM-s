@@ -1,0 +1,24 @@
+models:
+  medium:
+    - name: "mistralai/Mistral-7B-Instruct-v0.2"
+      size: "7B"
+
+    - name: "meta-llama/Llama-2-13b-chat-hf"
+      size: "13B"
+
+  large:
+    - name: "nvidia/Nemotron-30B"
+      size: "30B"
+
+# GENERATION SETTINGS
+generation:
+  max_new_tokens: 128
+  temperature: 0.0
+  do_sample: false
+
+
+# DATA PATHS
+paths:
+  raw_data: "data/raw/truthfulqa.csv"
+  processed_questions: "data/processed/questions.json"
+  database: "data/data.db"
