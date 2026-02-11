@@ -14,7 +14,7 @@ def initialize_database():
     # ----------------------------
     # Table: generations
     # ----------------------------
-    # Stores raw LLM outputs
+    # Stores raw LLM outputs (EXTENDED for k-based regimes)
     cur.execute("""
     CREATE TABLE IF NOT EXISTS generations (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,6 +24,8 @@ def initialize_database():
         model_name TEXT,
         model_size TEXT,
         temperature REAL,
+        generation_index INTEGER,      -- index within k
+        k_generations INTEGER,         -- total generations used (3,6,10,12)
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
@@ -31,7 +33,6 @@ def initialize_database():
     # ----------------------------
     # Table: entropy_features
     # ----------------------------
-    # Token-level uncertainty
     cur.execute("""
     CREATE TABLE IF NOT EXISTS entropy_features (
         generation_id INTEGER,
@@ -44,7 +45,6 @@ def initialize_database():
     # ----------------------------
     # Table: high_level_features
     # ----------------------------
-    # Consistency, semantics, linguistic signals
     cur.execute("""
     CREATE TABLE IF NOT EXISTS high_level_features (
         generation_id INTEGER,
@@ -58,7 +58,6 @@ def initialize_database():
     # ----------------------------
     # Table: labels
     # ----------------------------
-    # Ground truth correctness
     cur.execute("""
     CREATE TABLE IF NOT EXISTS labels (
         generation_id INTEGER,

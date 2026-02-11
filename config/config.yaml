@@ -1,24 +1,92 @@
-models:
-  medium:
-    - name: "mistralai/Mistral-7B-Instruct-v0.2"
-      size: "7B"
+# # ======================================
+# # Experiment Metadata
+# # ======================================
 
-    - name: "meta-llama/Llama-2-13b-chat-hf"
-      size: "13B"
+# experiment:
+#   name: hallucination_calibration_v1
+#   dataset: truthfulqa
+#   setting: zero_shot
+#   generations_per_question: 3
+#   max_new_tokens: 256
+#   temperature: 0.0
 
-  large:
-    - name: "nvidia/Nemotron-30B"
-      size: "30B"
+# generation_settings:
+#   regimes:
+#     - k: 1
+#     # - k: 6
+#     # - k: 10
+#     # - k: 12
 
-# GENERATION SETTINGS
-generation:
-  max_new_tokens: 128
+
+# # ======================================
+# # Model Registry
+# # ======================================
+
+# models:
+
+#   # -------- Small Models (1–2B) --------
+#   small:
+#   #   - name: llama-3.2-3b-instruct
+#   #     provider: openrouter
+#   #     model_id: meta-llama/llama-3.2-3b-instruct:free
+
+#     - name: gemma-3n-e2b-it
+#       provider: openrouter
+#       model_id: google/gemma-3n-e2b-it:free
+
+#   # -------- Medium Models (7–13B) --------
+#   medium:
+#     - name: mistral-7b-instruct
+#       provider: huggingface
+#       model_id: mistralai/Mistral-7B-Instruct-v0.2
+#       backend: featherless-ai
+
+#     - name: gemma-12b-instruct
+#       provider: openrouter
+#       model_id: google/gemma-3-12b-it:free
+
+#   # -------- Large Models (≈30B) --------
+#   large:
+#     - name: nemotron-3-nano-30b
+#       provider: openrouter
+#       model_id: nvidia/nemotron-3-nano-30b-a3b:free
+
+# # ======================================
+# # Data Paths
+# # ======================================
+
+# paths:
+#   raw_data: data/data/raw/TruthfulQA.csv
+#   processed_questions: data/data/processed/questions.json
+#   generations_csv: data/data/processed/generations.csv
+#   database: data/data/data.db
+
+# # ======================================
+# # Runtime & Logging
+# # ======================================
+
+# runtime:
+#   request_timeout_sec: 60
+#   retry_attempts: 2
+#   retry_backoff_sec: 5
+
+# logging:
+#   level: INFO
+#   save_prompts: true
+#   save_raw_generations: true
+experiment:
   temperature: 0.0
-  do_sample: false
+  max_new_tokens: 256
 
+generation_settings:
+  regimes:
+    - k: 3
+    - k: 6
+    - k: 10
+    - k: 12
 
-# DATA PATHS
-paths:
-  raw_data: "data/raw/truthfulqa.csv"
-  processed_questions: "data/processed/questions.json"
-  database: "data/data.db"
+models:
+  small:
+    - name: Llama-3.2-1B-Instruct
+      provider: local
+
