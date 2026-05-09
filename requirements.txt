@@ -1,0 +1,8 @@
+# Requirements for researchimp.ipynb Streamlit deployment
+streamlit
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+openpyxl
