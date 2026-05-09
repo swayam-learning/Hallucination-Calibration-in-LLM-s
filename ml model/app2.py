@@ -39,9 +39,23 @@ st.caption("Hybrid Reliability = Uncertainty + Semantic Alignment")
 # 📂 LOAD DATA (CACHE REMOVED)
 # ==========================================
 
+from pathlib import Path
+from pathlib import Path
+
 def load_data():
-    df = pd.read_csv("llm_reliability_dataset_final.csv")
-    df["band"] = df["band"].map({"1B": 1, "3B": 3, "7B": 7})
+
+    BASE_DIR = Path(__file__).parent
+
+    csv_path = BASE_DIR / "llm_reliability_dataset_final.csv"
+
+    df = pd.read_csv(csv_path)
+
+    df["band"] = df["band"].map({
+        "1B": 1,
+        "3B": 3,
+        "7B": 7
+    })
+
     return df
 
 df = load_data()
